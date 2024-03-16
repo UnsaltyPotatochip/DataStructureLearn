@@ -1,4 +1,4 @@
-// 2024-03-16 ÀÚ·á±¸Á¶ °øºÎ
+// 2024-03-16 ìžë£Œêµ¬ì¡° ê³µë¶€
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -21,9 +21,9 @@ int main(void) {
 	}
 	array = tmp;
 	/*
-		ÀÌ·¸°Ô µÇ¸é array°¡ ±âÁ¸¿¡ °¡¸®Å°´ø Á¤¼ö 4°³Â¥¸® ¹è¿­À» ÇÒ´ç¹ÞÀº
-		¸Þ¸ð¸® ÁÖ¼Ò¸¦ ¾Æ¹«µµ °¡ÁöÁö ¾Ê°Ô µÇ±â ¶§¹®¿¡ ±âÁ¸ÀÇ array°¡ °¡¸®Å°´ø
-		Á¤¼ö 4°³Â¥¸® ¹è¿­¸¸Å­ÀÇ ¸Þ¸ð¸® ÁÖ¼Ò´Â 'Garbage'°¡ µÈ´Ù.
+		ì´ë ‡ê²Œ ë˜ë©´ arrayê°€ ê¸°ì¡´ì— ê°€ë¦¬í‚¤ë˜ ì •ìˆ˜ 4ê°œì§œë¦¬ ë°°ì—´ì„ í• ë‹¹ë°›ì€
+		ë©”ëª¨ë¦¬ ì£¼ì†Œë¥¼ ì•„ë¬´ë„ ê°€ì§€ì§€ ì•Šê²Œ ë˜ê¸° ë•Œë¬¸ì— ê¸°ì¡´ì˜ arrayê°€ ê°€ë¦¬í‚¤ë˜
+		ì •ìˆ˜ 4ê°œì§œë¦¬ ë°°ì—´ë§Œí¼ì˜ ë©”ëª¨ë¦¬ ì£¼ì†ŒëŠ” 'Garbage'ê°€ ëœë‹¤.
 	*/
 	printf("\n");
 	for (int i = 0; i < 8; i++) {
