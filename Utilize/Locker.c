@@ -1,5 +1,5 @@
-// PracticeProject01 È°¿ë
-// ±×³É ¹è¿­ÀÌ¶û Æ÷ÀÎÅÍ °øºÎÇÏ·Á°í ÇÑ°ÅÁö »ç½Ç Á¸³ª ºñÈ¿À²ÀûÀÎ ÄÚµå
+// PracticeProject01 í™œìš©
+// ê·¸ëƒ¥ ë°°ì—´ì´ë‘ í¬ì¸í„° ê³µë¶€í•˜ë ¤ê³  í•œê±°ì§€ ì‚¬ì‹¤ ì¡´ë‚˜ ë¹„íš¨ìœ¨ì ì¸ ì½”ë“œ
 #include <stdio.h>
 #include <stdlib.h>
 #include <windows.h>
@@ -18,13 +18,13 @@ int main(void) {
 
 int* setting_pwd(void) {
 	int *tmp = (int*)malloc(4 * sizeof(int));
-	printf("ÇÑÀÚ¸® ¼ö Á¤¼ö 4°³·Î ÀÌ·ç¾îÁø ºñ¹Ğ¹øÈ£¸¦ ¼³Á¤ÇÏ¼¼¿ä.\n");
+	printf("í•œìë¦¬ ìˆ˜ ì •ìˆ˜ 4ê°œë¡œ ì´ë£¨ì–´ì§„ ë¹„ë°€ë²ˆí˜¸ë¥¼ ì„¤ì •í•˜ì„¸ìš”.\n");
 	for (int i = 0; i < 4; i++) {
 		printf(">>> ");
 		//scanf("%d", &tmp[i]);
 		scanf("%d", &(*(tmp + i)));
 		if (tmp[i] < 0 || tmp[i] >= 10) {
-			printf("ÇÑÀÚ¸® ¼ö Á¤¼ö·Î ´Ù½Ã ÀÔ·ÂÇÏ½Ê½Ã¿À.\n");
+			printf("í•œìë¦¬ ìˆ˜ ì •ìˆ˜ë¡œ ë‹¤ì‹œ ì…ë ¥í•˜ì‹­ì‹œì˜¤.\n");
 			i--;
 		}
 
@@ -36,12 +36,12 @@ void checking(int* pwd) {
 	int* tmp = (int*)malloc(4 * sizeof(int));
 	tmp = pwd;
 	system("cls");
-	printf("ÇöÀç ¼³Á¤µÈ ºñ¹Ğ¹øÈ£´Â ");
+	printf("í˜„ì¬ ì„¤ì •ëœ ë¹„ë°€ë²ˆí˜¸ëŠ” ");
 	for (int i = 0; i < 4; i++) {
 		//printf("%d", tmp[i]);
 		printf("%d", *(tmp + i));
 	}
-	printf(" ÀÔ´Ï´Ù.\n");
+	printf(" ì…ë‹ˆë‹¤.\n");
 	Sleep(2000);
 	system("cls");
 }
