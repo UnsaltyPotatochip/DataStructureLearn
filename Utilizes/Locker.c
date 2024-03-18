@@ -1,35 +1,41 @@
 // PracticeProject01 활용
 // 그냥 배열이랑 포인터 공부하려고 한거지 사실 존나 비효율적인 코드
+
+// 2024-03-18
+// 힙 영역에 메모리를 동적할당 후 메모리 할당을 해제하지 않았던 문제를 해결함
 #include <stdio.h>
 #include <stdlib.h>
 #include <windows.h>
 #define _CRT_SECURE_NO_WARNINGS
 #pragma warning(disable:4996)
 
-int* setting_pwd(void);
+void setting_pwd(void);
 void checking(int*);
 
 int main(void) {
 	int* pwd = (int*)malloc(4 * sizeof(int));
-	pwd = setting_pwd();
+	setting_pwd(pwd);
 	checking(pwd);
+
+	free(pwd);
 	return 0;
 }
 
-int* setting_pwd(void) {
-	int *tmp = (int*)malloc(4 * sizeof(int));
+void setting_pwd(int *pwd) {
+	int tmp = 0;
 	printf("한자리 수 정수 4개로 이루어진 비밀번호를 설정하세요.\n");
 	for (int i = 0; i < 4; i++) {
 		printf(">>> ");
-		//scanf("%d", &tmp[i]);
-		scanf("%d", &(*(tmp + i)));
-		if (tmp[i] < 0 || tmp[i] >= 10) {
-			printf("한자리 수 정수로 다시 입력하십시오.\n");
+
+		scanf_s("%d", &tmp);
+		if (0 <= tmp && tmp < 10) {
+			*(pwd + i) = tmp;
+		}
+		else {
+			printf("한자리 정수를 다시 입력하십시오.\n");
 			i--;
 		}
-
 	}
-	return tmp;
 }
 
 void checking(int* pwd) {
