@@ -1,5 +1,5 @@
-// 2024-04-07 ÀÚ·á±¸Á¶ °øºÎ
-// ÀüÈ­¹øÈ£ºÎ v2.0
+// 2024-04-07 ìžë£Œêµ¬ì¡° ê³µë¶€
+// ì „í™”ë²ˆí˜¸ë¶€ v2.0
 #include <stdio.h>
 #include <string.h>
 #define _CRT_SECURE_NO_WARNINGS
@@ -8,19 +8,19 @@
 #define CAPACITY 100
 #define BUFFER_SIZE 100
 
-char* names[CAPACITY];		// ÀÌ¸§À» ÀúÀåÇÏ´Â ¹è¿­
-char* numbers[CAPACITY];	// ÀüÈ­¹øÈ£¸¦ ÀúÀåÇÏ´Â ¹è¿­(010-xxxx-xxxx°ú °°Àº °æ¿ì·Î ÀúÀåÇÒ ¼ö ÀÖÀ¸´Ï char* ÇüÅÂ + ¸ÇÃ³À½ 0À» ÀÎ½Ä)
-int n = 0;					// ÀúÀåµÈ µ¥ÀÌÅÍ ¼ö
+char* names[CAPACITY];		// ì´ë¦„ì„ ì €ìž¥í•˜ëŠ” ë°°ì—´
+char* numbers[CAPACITY];	// ì „í™”ë²ˆí˜¸ë¥¼ ì €ìž¥í•˜ëŠ” ë°°ì—´(010-xxxx-xxxxê³¼ ê°™ì€ ê²½ìš°ë¡œ ì €ìž¥í•  ìˆ˜ ìžˆìœ¼ë‹ˆ char* í˜•íƒœ + ë§¨ì²˜ìŒ 0ì„ ì¸ì‹)
+int n = 0;					// ì €ìž¥ëœ ë°ì´í„° ìˆ˜
 
-// ÀüÈ­¹øÈ£ºÎ ¸í·É¾î
-// add [name] [call-number] : »õ·Î¿î »ç¶÷À» ÀüÈ­¹øÈ£ºÎ¿¡ Ãß°¡ÇÑ´Ù
-// find [name] : ÀÌ¸§À¸·Î ÀüÈ­¹øÈ£¸¦ °Ë»öÇÑ´Ù.
-// status : ÀüÈ­¹øÈ£ºÎ¿¡ ÀúÀåµÈ ¸ðµç »ç¶÷µéÀ» °Ë»öÇÑ´Ù.
-// delete [name] : ÀüÈ­¹øÈ£ºÎ¿¡¼­ ÇØ´ç »ç¶÷ÀÇ Á¤º¸¸¦ »èÁ¦ÇÑ´Ù.
-// exit : ÇÁ·Î±×·¥À» Á¾·áÇÑ´Ù.
-// load [fileName] : Á¤º¸°¡ ÀúÀåµÇÀÖ´Â ÆÄÀÏ ÇÏ³ª¸¦ ºÒ·¯¿Â´Ù.
-// save [fileName] : ÇöÀç µî·ÏµÈ Á¤º¸¸¦ ÆÄÀÏ·Î ÀúÀåÇÑ´Ù.
-// help : »ç¿ë °¡´ÉÇÑ ¸í·É¾î¸¦ º¸¿©ÁØ´Ù.
+// ì „í™”ë²ˆí˜¸ë¶€ ëª…ë ¹ì–´
+// add [name] [call-number] : ìƒˆë¡œìš´ ì‚¬ëžŒì„ ì „í™”ë²ˆí˜¸ë¶€ì— ì¶”ê°€í•œë‹¤
+// find [name] : ì´ë¦„ìœ¼ë¡œ ì „í™”ë²ˆí˜¸ë¥¼ ê²€ìƒ‰í•œë‹¤.
+// status : ì „í™”ë²ˆí˜¸ë¶€ì— ì €ìž¥ëœ ëª¨ë“  ì‚¬ëžŒë“¤ì„ ê²€ìƒ‰í•œë‹¤.
+// delete [name] : ì „í™”ë²ˆí˜¸ë¶€ì—ì„œ í•´ë‹¹ ì‚¬ëžŒì˜ ì •ë³´ë¥¼ ì‚­ì œí•œë‹¤.
+// exit : í”„ë¡œê·¸ëž¨ì„ ì¢…ë£Œí•œë‹¤.
+// load [fileName] : ì •ë³´ê°€ ì €ìž¥ë˜ìžˆëŠ” íŒŒì¼ í•˜ë‚˜ë¥¼ ë¶ˆëŸ¬ì˜¨ë‹¤.
+// save [fileName] : í˜„ìž¬ ë“±ë¡ëœ ì •ë³´ë¥¼ íŒŒì¼ë¡œ ì €ìž¥í•œë‹¤.
+// help : ì‚¬ìš© ê°€ëŠ¥í•œ ëª…ë ¹ì–´ë¥¼ ë³´ì—¬ì¤€ë‹¤.
 void add();
 void find();
 void status();
@@ -71,7 +71,7 @@ void add(void) {
 	char tmp1[BUFFER_SIZE], tmp2[BUFFER_SIZE];
 	scanf("%s%s", tmp1, tmp2);
 
-	// ÀüÈ­¹øÈ£ºÎ¿¡ ¾ËÆÄºª ¼øÀ¸·Î ÀúÀåµÇ°Ô Á¤·ÄÇÑ´Ù.
+	// ì „í™”ë²ˆí˜¸ë¶€ì— ì•ŒíŒŒë²³ ìˆœìœ¼ë¡œ ì €ìž¥ë˜ê²Œ ì •ë ¬í•œë‹¤.
 	int i = n - 1;
 	while (i >= 0 && strcmp(names[i], tmp1) > 0) {
 		names[i + 1] = names[i];
@@ -122,21 +122,21 @@ void load(void) {
 	char buf2[BUFFER_SIZE];
 
 	scanf("%s", fileName);
-	// ÆÄÀÏ¿¡ Á¢±ÙÇÏ±â À§ÇØ¼­ ¸ÕÀú ÇØ´ç ÆÄÀÏÀ» fopen()ÇÔ¼ö·Î ÀÐ±â¸ðµå(r)·Î ¿¬´Ù.
+	// íŒŒì¼ì— ì ‘ê·¼í•˜ê¸° ìœ„í•´ì„œ ë¨¼ì € í•´ë‹¹ íŒŒì¼ì„ fopen()í•¨ìˆ˜ë¡œ ì½ê¸°ëª¨ë“œ(r)ë¡œ ì—°ë‹¤.
 	FILE* fp = fopen(fileName, "r");
-	// ÆÄÀÏ ¿©´Â °ÍÀÌ ½ÇÆÐÇßÀ» ¶§ÀÇ ¿¹¿ÜÃ³¸®
+	// íŒŒì¼ ì—¬ëŠ” ê²ƒì´ ì‹¤íŒ¨í–ˆì„ ë•Œì˜ ì˜ˆì™¸ì²˜ë¦¬
 	if (fp == NULL) {
 		printf("Open failed.\n");
 		return;
 	}
-	// ÆÄÀÏÀÇ ³¡¿¡ µµ´ÞÇÒ ¶§±îÁö ¹Ýº¹ÇØ¼­ ÀÌ¸§°ú ÀüÈ­¹øÈ£¸¦ ÀÐ¾î¼­ ¹è¿­¿¡ ÀúÀåÇÑ´Ù.
+	// íŒŒì¼ì˜ ëì— ë„ë‹¬í•  ë•Œê¹Œì§€ ë°˜ë³µí•´ì„œ ì´ë¦„ê³¼ ì „í™”ë²ˆí˜¸ë¥¼ ì½ì–´ì„œ ë°°ì—´ì— ì €ìž¥í•œë‹¤.
 	while ((fscanf(fp, "%s", buf1) != EOF)) {
 		fscanf(fp, "%s", buf2);
 		names[n] = strdup(buf1);
 		numbers[n] = strdup(buf2);
 		n++;
 	}
-	// º¼ÀÏÀÌ ³¡³­ ÆÄÀÏÀº ¹Ýµå½Ã ´Ý¾ÆÁÖ¾î¾ß ÇÑ´Ù.
+	// ë³¼ì¼ì´ ëë‚œ íŒŒì¼ì€ ë°˜ë“œì‹œ ë‹«ì•„ì£¼ì–´ì•¼ í•œë‹¤.
 	fclose(fp);
 }
 
@@ -144,9 +144,9 @@ void save(void) {
 	char fileName[BUFFER_SIZE];
 	scanf("%s", fileName);
 
-	// ÆÄÀÏ ³»ºÎ ³»¿ëÀ» ÀÛ¼ºÇÏ·Á°í ÇÏ¹Ç·Î, ¾²±â(w)¸ðµå·Î ¿¬´Ù.
+	// íŒŒì¼ ë‚´ë¶€ ë‚´ìš©ì„ ìž‘ì„±í•˜ë ¤ê³  í•˜ë¯€ë¡œ, ì“°ê¸°(w)ëª¨ë“œë¡œ ì—°ë‹¤.
 	FILE* fp = fopen(fileName, "w");
-	// ¸ðÁ¾ÀÇ ÀÌÀ¯·Î ÆÄÀÏÀ» ¿­±â ½ÇÆÐÇßÀ» °æ¿ì
+	// ëª¨ì¢…ì˜ ì´ìœ ë¡œ íŒŒì¼ì„ ì—´ê¸° ì‹¤íŒ¨í–ˆì„ ê²½ìš°
 	if (fp == NULL) {
 		printf("Open failed\n");
 		return;
@@ -159,23 +159,23 @@ void save(void) {
 }
 
 void help(void) {
-	printf("add [name] [call-number] : »õ·Î¿î »ç¶÷À» ÀüÈ­¹øÈ£ºÎ¿¡ Ãß°¡ÇÑ´Ù.\n");
-	printf("find [name] : ÀÌ¸§À¸·Î ÀüÈ­¹øÈ£¸¦ °Ë»öÇÑ´Ù.\n");
-	printf("status : ÀüÈ­¹øÈ£ºÎ¿¡ ÀúÀåµÈ ¸ðµç »ç¶÷µéÀ» °Ë»öÇÑ´Ù.\n");
-	printf("delete [name] : ÀüÈ­¹øÈ£ºÎ¿¡¼­ ÇØ´ç »ç¶÷ÀÇ Á¤º¸¸¦ »èÁ¦ÇÑ´Ù.\n");
-	printf("load [fileName] : Á¤º¸°¡ ÀúÀåµÇÀÖ´Â ÆÄÀÏ ÇÏ³ª¸¦ ºÒ·¯¿Â´Ù.\n");
-	printf("save [fileName] : ÇöÀç µî·ÏµÈ Á¤º¸¸¦ ÆÄÀÏ·Î ÀúÀåÇÑ´Ù.\n");
-	printf("help : »ç¿ë °¡´ÉÇÑ ¸í·É¾î¸¦ º¸¿©ÁØ´Ù.\n");
-	printf("exit : ÇÁ·Î±×·¥À» Á¾·áÇÑ´Ù.\n");
+	printf("add [name] [call-number] : ìƒˆë¡œìš´ ì‚¬ëžŒì„ ì „í™”ë²ˆí˜¸ë¶€ì— ì¶”ê°€í•œë‹¤.\n");
+	printf("find [name] : ì´ë¦„ìœ¼ë¡œ ì „í™”ë²ˆí˜¸ë¥¼ ê²€ìƒ‰í•œë‹¤.\n");
+	printf("status : ì „í™”ë²ˆí˜¸ë¶€ì— ì €ìž¥ëœ ëª¨ë“  ì‚¬ëžŒë“¤ì„ ê²€ìƒ‰í•œë‹¤.\n");
+	printf("delete [name] : ì „í™”ë²ˆí˜¸ë¶€ì—ì„œ í•´ë‹¹ ì‚¬ëžŒì˜ ì •ë³´ë¥¼ ì‚­ì œí•œë‹¤.\n");
+	printf("load [fileName] : ì •ë³´ê°€ ì €ìž¥ë˜ìžˆëŠ” íŒŒì¼ í•˜ë‚˜ë¥¼ ë¶ˆëŸ¬ì˜¨ë‹¤.\n");
+	printf("save [fileName] : í˜„ìž¬ ë“±ë¡ëœ ì •ë³´ë¥¼ íŒŒì¼ë¡œ ì €ìž¥í•œë‹¤.\n");
+	printf("help : ì‚¬ìš© ê°€ëŠ¥í•œ ëª…ë ¹ì–´ë¥¼ ë³´ì—¬ì¤€ë‹¤.\n");
+	printf("exit : í”„ë¡œê·¸ëž¨ì„ ì¢…ë£Œí•œë‹¤.\n");
 }
 
-// Å½»öÇÏ´Â ÇÔ¼ö
+// íƒìƒ‰í•˜ëŠ” í•¨ìˆ˜
 int search(char* tmp) {
 	for (int i = 0; i < n; i++) {
 		if (strcmp(names[i], tmp) == 0) {
 			return i;
 		}
 	}
-	// Å½»ö¿¡ ½ÇÆÐÇÑ °æ¿ì
+	// íƒìƒ‰ì— ì‹¤íŒ¨í•œ ê²½ìš°
 	return -1;
 }
