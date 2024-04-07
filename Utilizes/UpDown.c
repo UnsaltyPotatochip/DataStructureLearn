@@ -1,6 +1,5 @@
 // PracticeProject05 활용
 // 파일입출력 연습
-// 파일입출력이 아직 원하는데로 안되는 중
 #include <stdio.h>
 #include <stdlib.h>
 #include <Windows.h>
