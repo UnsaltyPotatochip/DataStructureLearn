@@ -1,6 +1,6 @@
-// PracticeProject05 È°¿ë
-// ÆÄÀÏÀÔÃâ·Â ¿¬½À
-// ÆÄÀÏÀÔÃâ·ÂÀÌ ¾ÆÁ÷ ¿øÇÏ´Âµ¥·Î ¾ÈµÇ´Â Áß
+// PracticeProject05 í™œìš©
+// íŒŒì¼ì…ì¶œë ¥ ì—°ìŠµ
+// íŒŒì¼ì…ì¶œë ¥ì´ ì•„ì§ ì›í•˜ëŠ”ë°ë¡œ ì•ˆë˜ëŠ” ì¤‘
 #include <stdio.h>
 #include <stdlib.h>
 #include <Windows.h>
@@ -41,7 +41,7 @@ int main(void) {
 			system("cls");
 		}
 		else if (main_command == 3) {
-			// Á¡¼ö ÀĞ¾îµéÀÌ±â
+			// ì ìˆ˜ ì½ì–´ë“¤ì´ê¸°
 			system("cls");
 			char buf[CAPACITY];
 			FILE* fp = fopen("record.txt", "r");
@@ -101,7 +101,7 @@ void inGame(void) {
 			break;
 		}
 	}
-	// Á¡¼ö ±â·ÏÇÏ±â
+	// ì ìˆ˜ ê¸°ë¡í•˜ê¸°
 	FILE* fp = fopen("record.txt", "a");
 	if (fp == NULL) {
 		printf("Recording score failed.\n");
