@@ -1,5 +1,5 @@
-// 2024-04-11 ÀÚ·á±¸Á¶ °øºÎ
-// ÀüÈ­¹øÈ£ºÎ v4.0
+// 2024-04-20 ìë£Œêµ¬ì¡° ê³µë¶€
+// ì „í™”ë²ˆí˜¸ë¶€ v4.0
 #include <stdio.h>
 #include <string.h>
 #include <Windows.h>
@@ -9,7 +9,7 @@
 #define CAPACITY 100
 #define BUFFER_LENGTH 100
 
-// ÇÑ »ç¶÷ÀÇ Á¤º¸¸¦ ±¸Á¶Ã¼·Î ¹­¾îµĞ´Ù.
+// í•œ ì‚¬ëŒì˜ ì •ë³´ë¥¼ êµ¬ì¡°ì²´ë¡œ ë¬¶ì–´ë‘”ë‹¤.
 typedef struct {
 	char* name;
 	char* number;
@@ -17,23 +17,23 @@ typedef struct {
 	char* group;
 }PERSON;
 
-// PERSON Å¸ÀÔÀÇ ¹è¿­ directory¸¦ ¼±¾ğÇÑ´Ù.
+// PERSON íƒ€ì…ì˜ ë°°ì—´ directoryë¥¼ ì„ ì–¸í•œë‹¤.
 PERSON directory[CAPACITY];
 
-int n = 0;	// ÀüÈ­¹øÈ£ºÎ¿¡ ÀúÀåµÈ µ¥ÀÌÅÍ ¼ö
+int n = 0;	// ì „í™”ë²ˆí˜¸ë¶€ì— ì €ì¥ëœ ë°ì´í„° ìˆ˜
 
-char** names;		// ÀÌ¸§À» ÀúÀåÇÏ´Â ¹è¿­
-char** numbers;		// ÀüÈ­¹øÈ£¸¦ ÀúÀåÇÏ´Â ¹è¿­(010-xxxx-xxxx°ú °°Àº °æ¿ì·Î ÀúÀåÇÒ ¼ö ÀÖÀ¸´Ï char* ÇüÅÂ + ¸ÇÃ³À½ 0À» ÀÎ½Ä)
+char** names;		// ì´ë¦„ì„ ì €ì¥í•˜ëŠ” ë°°ì—´
+char** numbers;		// ì „í™”ë²ˆí˜¸ë¥¼ ì €ì¥í•˜ëŠ” ë°°ì—´(010-xxxx-xxxxê³¼ ê°™ì€ ê²½ìš°ë¡œ ì €ì¥í•  ìˆ˜ ìˆìœ¼ë‹ˆ char* í˜•íƒœ + ë§¨ì²˜ìŒ 0ì„ ì¸ì‹)
 
-// ÀüÈ­¹øÈ£ºÎ ¸í·É¾î
-// add : »õ·Î¿î »ç¶÷À» ÀüÈ­¹øÈ£ºÎ¿¡ Ãß°¡ÇÑ´Ù
-// find : ÀÌ¸§À¸·Î ÀüÈ­¹øÈ£¸¦ °Ë»öÇÑ´Ù.
-// status : ÀüÈ­¹øÈ£ºÎ¿¡ ÀúÀåµÈ ¸ğµç »ç¶÷µéÀ» °Ë»öÇÑ´Ù.
-// delete [name] : ÀüÈ­¹øÈ£ºÎ¿¡¼­ ÇØ´ç »ç¶÷ÀÇ Á¤º¸¸¦ »èÁ¦ÇÑ´Ù.
-// exit : ÇÁ·Î±×·¥À» Á¾·áÇÑ´Ù.
-// load [fileName] : Á¤º¸°¡ ÀúÀåµÇÀÖ´Â ÆÄÀÏ ÇÏ³ª¸¦ ºÒ·¯¿Â´Ù.
-// save as [fileName] : ÇöÀç µî·ÏµÈ Á¤º¸¸¦ ÆÄÀÏ·Î ÀúÀåÇÑ´Ù.
-// clear : ÇÁ·ÒÆ÷Æ® Ã¢ ±â·ÏÀ» Áö¿î´Ù.
+// ì „í™”ë²ˆí˜¸ë¶€ ëª…ë ¹ì–´
+// add : ìƒˆë¡œìš´ ì‚¬ëŒì„ ì „í™”ë²ˆí˜¸ë¶€ì— ì¶”ê°€í•œë‹¤
+// find : ì´ë¦„ìœ¼ë¡œ ì „í™”ë²ˆí˜¸ë¥¼ ê²€ìƒ‰í•œë‹¤.
+// status : ì „í™”ë²ˆí˜¸ë¶€ì— ì €ì¥ëœ ëª¨ë“  ì‚¬ëŒë“¤ì„ ê²€ìƒ‰í•œë‹¤.
+// delete [name] : ì „í™”ë²ˆí˜¸ë¶€ì—ì„œ í•´ë‹¹ ì‚¬ëŒì˜ ì •ë³´ë¥¼ ì‚­ì œí•œë‹¤.
+// exit : í”„ë¡œê·¸ë¨ì„ ì¢…ë£Œí•œë‹¤.
+// load [fileName] : ì •ë³´ê°€ ì €ì¥ë˜ìˆëŠ” íŒŒì¼ í•˜ë‚˜ë¥¼ ë¶ˆëŸ¬ì˜¨ë‹¤.
+// save as [fileName] : í˜„ì¬ ë“±ë¡ëœ ì •ë³´ë¥¼ íŒŒì¼ë¡œ ì €ì¥í•œë‹¤.
+// clear : í”„ë¡¬í¬íŠ¸ ì°½ ê¸°ë¡ì„ ì§€ìš´ë‹¤.
 void add(char*, char*, char*, char*);
 void handle_add(char*);
 void find(char*);
@@ -43,7 +43,7 @@ void load(char*);
 void save(char*);
 
 int read_line(FILE*, char[], int);
-int search(char*);			// Å½»öÇÏ´Â ÇÔ¼ö
+int search(char*);			// íƒìƒ‰í•˜ëŠ” í•¨ìˆ˜
 int compose_name(char[], int);
 void print_person(PERSON);
 
@@ -117,7 +117,7 @@ void add(char* name, char* number, char* email, char* group) {
 		i--;
 	}
 
-	// ¸ğµç Ç×¸ñµéÀ» strdup·Î º¹Á¦ÇÏ¿© ÀúÀåÇÑ´Ù.
+	// ëª¨ë“  í•­ëª©ë“¤ì„ strdupë¡œ ë³µì œí•˜ì—¬ ì €ì¥í•œë‹¤.
 	directory[i + 1].name = strdup(name);
 	directory[i + 1].number = strdup(number);
 	directory[i + 1].email = strdup(email);
@@ -145,7 +145,7 @@ void delete(char* name) {
 		return;
 	}
 	for (int i = index; i < n - 1; i++) {
-		// ±¸Á¶Ã¼ º¯¼ö°£ÀÇ Ä¡È¯ ¿¬»êÀÌ Àû¿ëµÇ¹Ç·Î ¸â¹ö Ç×¸ñµéÀ» µû·Îµû·Î Ä¡È¯ÇÒ ÇÊ¿ä°¡ ¾ø´Ù.
+		// êµ¬ì¡°ì²´ ë³€ìˆ˜ê°„ì˜ ì¹˜í™˜ ì—°ì‚°ì´ ì ìš©ë˜ë¯€ë¡œ ë©¤ë²„ í•­ëª©ë“¤ì„ ë”°ë¡œë”°ë¡œ ì¹˜í™˜í•  í•„ìš”ê°€ ì—†ë‹¤.
 		directory[i] = directory[i + 1];
 	}
 	n--;
@@ -156,15 +156,15 @@ void load(char* fileName) {
 	char buffer[BUFFER_LENGTH];
 	char* name, * number, * email, * group;
 
-	// ÆÄÀÏ¿¡ Á¢±ÙÇÏ±â À§ÇØ¼­ ¸ÕÀú ÇØ´ç ÆÄÀÏÀ» fopen()ÇÔ¼ö·Î ÀĞ±â¸ğµå(r)·Î ¿¬´Ù.
+	// íŒŒì¼ì— ì ‘ê·¼í•˜ê¸° ìœ„í•´ì„œ ë¨¼ì € í•´ë‹¹ íŒŒì¼ì„ fopen()í•¨ìˆ˜ë¡œ ì½ê¸°ëª¨ë“œ(r)ë¡œ ì—°ë‹¤.
 	FILE* fp = fopen(fileName, "r");
-	// ÆÄÀÏ ¿©´Â °ÍÀÌ ½ÇÆĞÇßÀ» ¶§ÀÇ ¿¹¿ÜÃ³¸®
+	// íŒŒì¼ ì—¬ëŠ” ê²ƒì´ ì‹¤íŒ¨í–ˆì„ ë•Œì˜ ì˜ˆì™¸ì²˜ë¦¬
 	if (fp == NULL) {
 		printf("Open failed.\n");
 		return;
 	}
 	while (1) {
-		// ´õ ÀÌ»ó ÀĞÀ» ¼ö ÀÖ´Â ¶óÀÎÀÌ ¾øÀ½
+		// ë” ì´ìƒ ì½ì„ ìˆ˜ ìˆëŠ” ë¼ì¸ì´ ì—†ìŒ
 		if (read_line(fp, buffer, BUFFER_LENGTH) <= 0) break;
 		name = strtok(buffer, "#");
 		number = strtok(NULL, "#");
@@ -172,14 +172,14 @@ void load(char* fileName) {
 		group = strtok(NULL, "#");
 		add(name, number, email, group);
 	}
-	// º¼ÀÏÀÌ ³¡³­ ÆÄÀÏÀº ¹İµå½Ã ´İ¾ÆÁÖ¾î¾ß ÇÑ´Ù.
+	// ë³¼ì¼ì´ ëë‚œ íŒŒì¼ì€ ë°˜ë“œì‹œ ë‹«ì•„ì£¼ì–´ì•¼ í•œë‹¤.
 	fclose(fp);
 }
 
 void save(char* fileName) {
-	// ÆÄÀÏ ³»ºÎ ³»¿ëÀ» ÀÛ¼ºÇÏ·Á°í ÇÏ¹Ç·Î, ¾²±â(w)¸ğµå·Î ¿¬´Ù.
+	// íŒŒì¼ ë‚´ë¶€ ë‚´ìš©ì„ ì‘ì„±í•˜ë ¤ê³  í•˜ë¯€ë¡œ, ì“°ê¸°(w)ëª¨ë“œë¡œ ì—°ë‹¤.
 	FILE* fp = fopen(fileName, "w");
-	// ¸ğÁ¾ÀÇ ÀÌÀ¯·Î ÆÄÀÏÀ» ¿­±â ½ÇÆĞÇßÀ» °æ¿ì
+	// ëª¨ì¢…ì˜ ì´ìœ ë¡œ íŒŒì¼ì„ ì—´ê¸° ì‹¤íŒ¨í–ˆì„ ê²½ìš°
 	if (fp == NULL) {
 		printf("Open failed\n");
 		return;
@@ -193,13 +193,13 @@ void save(char* fileName) {
 	fclose(fp);
 }
 
-// Å°º¸µå»Ó¸¸ÀÌ ¾Æ´Ï¶ó ÆÄÀÏ·ÎºÎÅÍµµ ÀĞÀ» ¼ö ÀÖ´Ù.
-// FILE* ¸Å°³º¯¼ö ÀÚ¸®¿¡ stdinÀ» ³ÖÀ¸¸é, Å°º¸µå·ÎºÎÅÍ ÀÔ·ÂÀ» ¹ŞÀ» ¼ö ÀÖ°Ô µÈ´Ù.
+// í‚¤ë³´ë“œë¿ë§Œì´ ì•„ë‹ˆë¼ íŒŒì¼ë¡œë¶€í„°ë„ ì½ì„ ìˆ˜ ìˆë‹¤.
+// FILE* ë§¤ê°œë³€ìˆ˜ ìë¦¬ì— stdinì„ ë„£ìœ¼ë©´, í‚¤ë³´ë“œë¡œë¶€í„° ì…ë ¥ì„ ë°›ì„ ìˆ˜ ìˆê²Œ ëœë‹¤.
 int read_line(FILE *fp, char str[], int n) {
 	int ch, i = 0;
 
 	while ((ch = fgetc(fp)) != '\n' && ch != EOF) {
-		// ¹®ÀÚ¿­¿¡ °ø°£ÀÌ ÀÖ´Ù¸é ¹®ÀÚ¿­¿¡ ÀÔ·Â¹ŞÀº ¹®ÀÚ¸¦ ÀÔ·ÂÇÑ´Ù.
+		// ë¬¸ìì—´ì— ê³µê°„ì´ ìˆë‹¤ë©´ ë¬¸ìì—´ì— ì…ë ¥ë°›ì€ ë¬¸ìë¥¼ ì…ë ¥í•œë‹¤.
 		if (i < n-1) str[i++] = ch;
 	}
 	str[i] = '\0';
@@ -212,7 +212,7 @@ int search(char* tmp) {
 			return i;
 		}
 	}
-	// Å½»ö¿¡ ½ÇÆĞÇÑ °æ¿ì
+	// íƒìƒ‰ì— ì‹¤íŒ¨í•œ ê²½ìš°
 	return -1;
 }
 
@@ -248,7 +248,7 @@ void handle_add(char* name) {
 	printf("   Group : ");
 	read_line(stdin, group, BUFFER_LENGTH);
 
-	// Á¸ÀçÇÏÁö ¾Ê´Â Ç×¸ñµéÀº ÇÏ³ªÀÇ °ø¹é¹®ÀÚ·Î¸¸ ³²°ÜµĞ´Ù.
+	// ì¡´ì¬í•˜ì§€ ì•ŠëŠ” í•­ëª©ë“¤ì€ í•˜ë‚˜ì˜ ê³µë°±ë¬¸ìë¡œë§Œ ë‚¨ê²¨ë‘”ë‹¤.
 	add(name, (char*)(strlen(number) > 0 ? number : empty),
 		(char*)(strlen(email) > 0 ? email : empty),
 		(char*)(strlen(group) > 0 ? group : empty));
